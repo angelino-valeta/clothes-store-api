@@ -1,2 +1,2 @@
-# clothes-store
+# clothes store api
 virtual store for clothing sales
