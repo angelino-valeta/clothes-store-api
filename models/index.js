@@ -2,9 +2,9 @@ const Sequelize = require('sequelize')
 
 // Pegando informações da base de dados
 const user = process.env.DB_USER || 'root'
-const password = process.env.DB_PASSWORD || 'Angelson@03Db'
+const password = process.env.DB_PASSWORD || 'root'
 const host = process.env.DB_HOST || 'localhost'
-const database = process.env.DB_DATABSE || 'clothesStore'
+const database = process.env.DB_DATABSE || 'yourDatabase'
 const dialect = process.env.DB_DIALECT || 'mysql'
 
 console.log(user,password)
