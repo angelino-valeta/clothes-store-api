@@ -1,18 +1,54 @@
 const { User } = require('../models')
+const sendToken = require('../utils/jwtToken')
+const ErrorHandler = require('../utils/errorHandler')
 
 const catchAsyncErrors = require('../middlewares/catchAsyncErrors')
 
-
-// Registrar usuário  => api/v1/register
+// Registrar User  => api/v1/register
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
   
   const { name, email ,password } = req.body
 
   const user = await User.create({ name, email, password })
-
-  res.status(200).json({
-    sucess: true,
-    user
-  })
+  
+  sendToken(user, 200, res)
 
 }) 
+
+// Login User   => /api/v1/login
+exports.login = catchAsyncErrors(async (req, res, next) => {
+
+  const { email ,password } = req.body
+
+  // Verificar se existe password e email
+  if(!email || !password){
+    return next(new ErrorHandler('Por favor digite a password e o email ', 400))
+  }
+
+  // Procurar user na database
+  const user = await User.findOne({ where: { email }})
+
+  if(!user){
+    return next(new ErrorHandler('Usuário não encontrado', 401))
+  }
+
+  const isPasswordMatched = await user.comparePassword(password)
+
+  if(!isPasswordMatched){
+    return next(new ErrorHandler('Password incorrecta.', 401))
+  }
+  sendToken(user, 200, res)
+})
+
+// Logout User   => /api/v1/logout 
+exports.logout = catchAsyncErrors(async (req, res, next) => {
+  res.cookie('token', null,{
+    expires: new Date(Date.now()),
+    httpOnly: true
+  })
+
+  res.status(200).json({
+    success: true,
+    message: 'logged out'
+  })
+})

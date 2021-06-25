@@ -1,4 +1,5 @@
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
 module.exports = (sequelize, DataTypes) => {
   const {
@@ -56,6 +57,29 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   })
+
+  User.associate = function (models) {
+    User.hasMany(models.Order)
+    User.hasMany(models.Address)
+    User.hasMany(models.Review)
+  }
+
+  User.beforeBulkUpdate(user => {
+    user.attributes.updateTime = new Date();
+    return user;
+  })
+
+  // Verificação da palavra passe
+  User.prototype.comparePassword = async function(enteredPassword){
+    return bcrypt.compare(enteredPassword, this.password)
+  }
+
+  // Geração de Token
+  User.prototype.getJWToken = function () {
+    return jwt.sign({userId: this.id},
+        process.env.JWT_SECRET ,
+        {expiresIn: process.env.JWT_EXPIRES_TIME});
+  }
 
   return User
 }

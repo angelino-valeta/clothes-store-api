@@ -15,10 +15,6 @@ module.exports = function (sequelize, DataTypes) {
       type: STRING(50),
       allowNull: false,
     },
-    userId: {
-      type: BIGINT,
-      allowNull: true,
-    },
     orderId: {
       type: BIGINT,
       allowNull: false,
