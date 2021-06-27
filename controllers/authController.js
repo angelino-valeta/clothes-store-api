@@ -1,4 +1,4 @@
-const { User } = require('../models')
+const { User, Address } = require('../models')
 const sendToken = require('../utils/jwtToken')
 const ErrorHandler = require('../utils/errorHandler')
 
@@ -7,9 +7,9 @@ const catchAsyncErrors = require('../middlewares/catchAsyncErrors')
 // Registrar User  => api/v1/register
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
   
-  const { name, email ,password } = req.body
+  const { name, email ,password, phone } = req.body
 
-  const user = await User.create({ name, email, password })
+  const user = await User.create({ name, email, password, phone })
   
   sendToken(user, 200, res)
 
@@ -52,3 +52,33 @@ exports.logout = catchAsyncErrors(async (req, res, next) => {
     message: 'logged out'
   })
 })
+
+
+// Admin
+
+// Get Users   => /api/v1/admin/users
+exports.getUsers = catchAsyncErrors(async (req, res) => {
+
+  const users = await User.findAll({
+    attributes: {
+      exclude: ['password']
+    },
+    include: {
+      model: Address,
+      attributes: [
+        'address',
+        'city',
+        'street',
+        'country',
+        'zipCode'
+      ]
+    }
+  })
+
+  res.status(200).json({
+    success: true,
+    count: users.length,
+    users
+  })
+})
+

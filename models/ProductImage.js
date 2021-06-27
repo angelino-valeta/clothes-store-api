@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     productId: {
       type: BIGINT,
-      allowNull: true,
+      allowNull: false  ,
     },
     imageName: {
       type: STRING,

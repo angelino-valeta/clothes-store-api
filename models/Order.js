@@ -33,6 +33,10 @@ module.exports = function (sequelize, DataTypes) {
       type: FLOAT,
       defaultValue: 0,
     },
+    taxPrice: {
+      type: FLOAT,
+      defaultValue: 0,
+    },
     totalPrice: {
       type: DOUBLE,
       defaultValue: 0,
@@ -61,6 +65,11 @@ module.exports = function (sequelize, DataTypes) {
     Order.belongsTo(models.User)
     Order.belongsTo(models.Address)
   }
+
+  Order.beforeBulkUpdate(order => {
+    order.attributes.updateTime = new Date();
+    return order;
+  })
 
   return Order
 }

@@ -1,4 +1,7 @@
 const Sequelize = require('sequelize')
+const dotenv = require('dotenv')
+dotenv.config({ path: './config/config.env' });
+
 
 // Pegando informações da base de dados
 const user = process.env.DB_USER || 'root'
@@ -11,7 +14,10 @@ console.log(user,password)
 
 const sequelize = new Sequelize(database, user, password, {
   host,
-  dialect
+  dialect,
+  define: {
+    timestamps: true,
+  },
 })
 
 const db = {};

@@ -10,6 +10,14 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true,
     },
+    userId: {
+      type: BIGINT,
+      allowNull: false,
+    },
+    productId: {
+      type: BIGINT,
+      allowNull: false,
+    },
     createdAt: {
     type: DATE,
     allowNull: false,

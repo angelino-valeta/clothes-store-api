@@ -21,15 +21,19 @@ module.exports = function (sequelize, DataTypes) {
     },
     productId: {
       type: BIGINT,
-      allowNull: true,
+      allowNull: false,
+    },
+    image: {
+      type: STRING,
+      allowNull: false,
     },
     price: {
       type: DOUBLE,
-      allowNull: true,
+      allowNull: false,
     },
     quantity: {
       type: INTEGER,
-      allowNull: true,
+      allowNull: false,
     },
     createdAt: {
       type: DATE,
@@ -51,6 +55,11 @@ module.exports = function (sequelize, DataTypes) {
     OrderItem.belongsTo(models.Order)
     OrderItem.belongsTo(models.Product)
   }
- 
+
+  OrderItem.beforeBulkUpdate(orderItem => {
+    orderItem.attributes.updateTime = new Date();
+    return orderItem;
+  })
+
   return OrderItem
 }

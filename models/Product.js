@@ -1,6 +1,8 @@
+const { DOUBLE, FLOAT } = require("sequelize")
+
 module.exports = (sequelize, DataTypes) => {
   const {
-    BIGINT,INTEGER, STRING, DATE, TEXT, FLOAT
+    BIGINT,INTEGER, STRING, DATE, TEXT, DOUBLE
   } = DataTypes
 
   const Product = sequelize.define('products',{
@@ -9,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
+    },
+    categoryId: {
+      type: BIGINT,
+      allowNull: false,
     },
     name: {
       type: STRING,
@@ -19,14 +25,23 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     price: {
-      type: FLOAT,
+      type: DOUBLE,
       allowNull: false,
+      defaultValue: 0
     },
     stock: {
       type: INTEGER,
       allowNull: false,
+      defaultValue: 0
     },
-    image: STRING,
+    ratings:{
+      type: FLOAT,
+      defaultValue: 0
+    },
+    numOfReviews:{
+      type: INTEGER,
+      defaultValue: 0
+    },
     createdAt: {
     type: DATE,
     allowNull: false,
@@ -38,7 +53,6 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: new Date(),
     }
   },{
-    timestamps: false,
     tableName: 'products',
   })
 

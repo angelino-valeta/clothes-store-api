@@ -12,11 +12,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     productId: {
       type: BIGINT,
-      allowNull: true,
+      allowNull: false,
     },
     userId: {
       type: BIGINT,
-      allowNull: true,
+      allowNull: false,
     },
     comment: {
       type: STRING,
@@ -38,13 +38,12 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: new Date(),
     }
   },{
-    timestamps: false,
     tableName: 'reviews',
   })
 
   // Relacionamento de tabelas
   Review.associate = (models) => {
-    Review.belongsTo(models.User)
+    Review.belongsTo(models.User, {onDelete: 'cascade'})
     Review.belongsTo(models.Product, {onDelete: 'cascade'})
   }
 

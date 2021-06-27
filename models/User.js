@@ -64,6 +64,12 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Review)
   }
 
+  User.addScope('excludePassword', {
+    attributes:{
+      exclude: ['password']
+    }
+  })
+
   User.beforeBulkUpdate(user => {
     user.attributes.updateTime = new Date();
     return user;
