@@ -1,9 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
   const {
-    BIGINT, INTEGER, STRING, DATE
+    BIGINT,
+    INTEGER,
+    STRING,
+    DATE
   } = DataTypes
 
-  const Review = sequelize.define('reviews',{
+  const Review = sequelize.define('reviews', {
     id: {
       type: BIGINT,
       allowNull: false,
@@ -20,7 +23,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     comment: {
       type: STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'Digite um comentário'
+        },
+      }
     },
     rating: {
       type: INTEGER,
@@ -28,23 +36,27 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 0,
     },
     createdAt: {
-    type: DATE,
-    allowNull: false,
-    defaultValue: new Date(),
+      type: DATE,
+      allowNull: false,
+      defaultValue: new Date(),
     },
     updatedAt: {
       type: DATE,
       allowNull: false,
       defaultValue: new Date(),
     }
-  },{
+  }, {
     tableName: 'reviews',
   })
 
   // Relacionamento de tabelas
   Review.associate = (models) => {
-    Review.belongsTo(models.User, {onDelete: 'cascade'})
-    Review.belongsTo(models.Product, {onDelete: 'cascade'})
+    Review.belongsTo(models.User, {
+      onDelete: 'cascade'
+    })
+    Review.belongsTo(models.Product, {
+      onDelete: 'cascade'
+    })
   }
 
   return Review

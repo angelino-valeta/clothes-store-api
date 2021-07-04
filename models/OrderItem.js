@@ -1,7 +1,11 @@
 module.exports = function (sequelize, DataTypes) {
 
   const {
-    DOUBLE, DATE, BIGINT, STRING, INTEGER
+    DOUBLE,
+    DATE,
+    BIGINT,
+    STRING,
+    INTEGER
   } = DataTypes
 
   const OrderItem = sequelize.define('orderItems', {
@@ -15,13 +19,19 @@ module.exports = function (sequelize, DataTypes) {
       type: STRING(50),
       allowNull: false,
     },
-    orderId: {
-      type: BIGINT,
-      allowNull: false,
-    },
     productId: {
       type: BIGINT,
       allowNull: false,
+      validate: {
+        isNumeric: true,
+      }
+    },
+    orderId: {
+      type: BIGINT,
+      allowNull: false,
+      validate: {
+        isNumeric: true,
+      }
     },
     image: {
       type: STRING,
@@ -30,10 +40,16 @@ module.exports = function (sequelize, DataTypes) {
     price: {
       type: DOUBLE,
       allowNull: false,
+      validate: {
+        isNumeric: true,
+      }
     },
     quantity: {
       type: INTEGER,
       allowNull: false,
+      validate: {
+        isInt: true,
+      }
     },
     createdAt: {
       type: DATE,
@@ -49,11 +65,11 @@ module.exports = function (sequelize, DataTypes) {
     timestamps: false,
     tableName: 'orderItems',
   })
-  
+
   // Relacionamento de tabelas
   OrderItem.associate = function (models) {
-    OrderItem.belongsTo(models.Order)
     OrderItem.belongsTo(models.Product)
+    OrderItem.belongsTo(models.Order)
   }
 
   OrderItem.beforeBulkUpdate(orderItem => {

@@ -1,19 +1,25 @@
 const express = require('express')
 const router = express.Router()
 
-const { registerUser, login, logout, getUsers, getUser, updateUser, deleteUser} = require('../controllers/authController') 
+const { 
+  register,
+  login,
+  logout,
+  getMe,
+  updatePerfile,
+  updatePassword,
+  deleteAccount
+} = require('../controllers/authController') 
 
-router.route('/register').post(registerUser)
+const { isAuthenticatedUser } = require('../middlewares/auth')
 
-router.route('/login').post(login)
+router.post('/register', register)
+router.post('/login', login)
+router.get('/logout', logout)
+router.get('/me', isAuthenticatedUser, getMe)
+router.put('/update', isAuthenticatedUser, updatePerfile)
+router.put('/password/update', isAuthenticatedUser, updatePassword)
+router.delete('/deleteAccount', isAuthenticatedUser, deleteAccount)
 
-router.route('/logout').get(logout)
-
-// admin  
-router.route('/admin/users').get(getUsers)
-router.route('/admin/user/:id')
-  .get(getUser)
-  .put(updateUser)
-  .delete(deleteUser)
 
 module.exports = router

@@ -1,6 +1,10 @@
 module.exports = function (sequelize, DataTypes) {
   const {
-    DOUBLE, DATE, BIGINT, STRING, FLOAT
+    DOUBLE,
+    DATE,
+    BIGINT,
+    STRING,
+    FLOAT
   } = DataTypes
 
   const Order = sequelize.define('orders', {
@@ -13,35 +17,50 @@ module.exports = function (sequelize, DataTypes) {
     userId: {
       type: BIGINT,
       allowNull: false,
+      validate: {
+        isNumeric: true,
+      }
     },
     addressId: {
       type: BIGINT,
       allowNull: false,
+      validate: {
+        isNumeric: true,
+      }
     },
     orderStatus: {
       type: STRING,
-      defaultValue: 'Processando', // Enviando, Entragado
+      defaultValue: 'Processando', // Enviando, Entregado
     },
     paidAt: {
       type: DATE
     },
-    itemsPrice:{
+    itemsPrice: {
       type: FLOAT,
       defaultValue: 0,
+      validate: {
+        isFloat: true
+      }
     },
-    shippingPrice:{
+    shippingPrice: {
       type: FLOAT,
       defaultValue: 0,
     },
     taxPrice: {
       type: FLOAT,
       defaultValue: 0,
+      validate: {
+        isFloat: true
+      }
     },
     totalPrice: {
       type: DOUBLE,
       defaultValue: 0,
+      validate: {
+        isNumeric: true
+      }
     },
-    deliverAt:{
+    deliverAt: {
       type: DATE
     },
     createdAt: {

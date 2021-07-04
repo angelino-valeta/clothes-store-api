@@ -14,9 +14,13 @@ module.exports = (sequelize, DataTypes) => {
       type: BIGINT,
       allowNull: false  ,
     },
-    imageName: {
+    fileName: {
       type: STRING,
-      allowNull: false
+      allowNull: false,
+    },
+    filePath: {
+      type: STRING,
+      allowNull: false,
     },
     createdAt: {
     type: DATE,

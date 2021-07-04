@@ -1,9 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
   const {
-    BIGINT, STRING, DATE, BOOLEAN
+    BIGINT,
+    STRING,
+    DATE,
+    BOOLEAN
   } = DataTypes
 
-  const Payment = sequelize.define('payments',{
+  const Payment = sequelize.define('payments', {
     id: {
       type: BIGINT,
       allowNull: false,
@@ -13,30 +16,34 @@ module.exports = (sequelize, DataTypes) => {
     orderId: {
       type: BIGINT,
       allowNull: false,
+      validate: {
+        isNumeric: true,
+      }
     },
     status: {
-      type: BOOLEAN,
-      defaultValue: 0,
+      type: STRING,
+      defaultValue: 'Sucesso'
     },
     createdAt: {
-    type: DATE,
-    allowNull: false,
-    defaultValue: new Date(),
+      type: DATE,
+      allowNull: false,
+      defaultValue: new Date(),
     },
     updatedAt: {
       type: DATE,
       allowNull: false,
       defaultValue: new Date(),
     },
-  },{
+  }, {
     timestamps: false,
     tableName: 'payments',
-    
+
   })
 
-  Payment.associate = function (models) {
-    Payment.belongsTo(models.Order, {onDelete: 'cascade'})
-  }
+  Payment.associate = (models) => {
+    Payment.belongsTo(models.Order);
+
+  };
 
   return Payment
 }

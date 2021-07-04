@@ -23,16 +23,16 @@ const sequelize = new Sequelize(database, user, password, {
 const db = {};
 
 // Medels
-db.User = require('./User')(sequelize, Sequelize.DataTypes)
+db.User = require('./User')(sequelize, Sequelize.DataTypes) 
 db.Product = require('./Product')(sequelize, Sequelize.DataTypes)
-db.Category = require('./Category')(sequelize, Sequelize.DataTypes)
-db.ProductImage = require('./ProductImage')(sequelize, Sequelize.DataTypes)
-db.Review = require('./Review')(sequelize, Sequelize.DataTypes)
+ db.Category = require('./Category')(sequelize, Sequelize.DataTypes)
+ db.ProductImage = require('./ProductImage')(sequelize, Sequelize.DataTypes)
+ db.Review = require('./Review')(sequelize, Sequelize.DataTypes)
 db.Address = require('./Address')(sequelize, Sequelize.DataTypes)
 db.Wishlist = require('./WishList')(sequelize, Sequelize.DataTypes)
 db.Order = require('./Order')(sequelize, Sequelize.DataTypes)
 db.OrderItem = require('./OrderItem')(sequelize, Sequelize.DataTypes)
-db.Payment = require('./Payment')(sequelize, Sequelize.DataTypes)
+ db.Payment = require('./Payment')(sequelize, Sequelize.DataTypes)
 
 
 Object.keys(db).forEach((modelName) => {

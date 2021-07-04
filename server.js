@@ -1,6 +1,8 @@
 const app = require('./app')
 const dotenv = require('dotenv')
-const { sequelize } = require('./models')
+const {
+  sequelize
+} = require('./models')
 
 
 process.on('uncaughtException', err => {
@@ -10,17 +12,17 @@ process.on('uncaughtException', err => {
 })
 
 // Configurando variaveis de ambiente
-dotenv.config({ path: './config/config.env' });
+dotenv.config({
+  path: './config/config.env'
+});
 
 
 const PORT = process.env.PORT || 5000
 
 // Conectando a base de dados e o ligando o servidor 
 sequelize.sync()
-	.then(() => {
+  .then(() => {
     app.listen(PORT, () => {
       console.log(`Servidor rodando na porta ${PORT}`)
     })
-	})
-
-
+  })

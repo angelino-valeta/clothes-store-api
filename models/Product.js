@@ -1,11 +1,20 @@
-const { DOUBLE, FLOAT } = require("sequelize")
+const {
+  DOUBLE,
+  FLOAT
+} = require("sequelize")
 
 module.exports = (sequelize, DataTypes) => {
   const {
-    BIGINT,INTEGER, STRING, DATE, TEXT, DOUBLE
+    BIGINT,
+    INTEGER,
+    STRING,
+    DATE,
+    TEXT,
+    DOUBLE,
+    BOOLEAN
   } = DataTypes
 
-  const Product = sequelize.define('products',{
+  const Product = sequelize.define('products', {
     id: {
       type: BIGINT,
       allowNull: false,
@@ -14,45 +23,82 @@ module.exports = (sequelize, DataTypes) => {
     },
     categoryId: {
       type: BIGINT,
-      allowNull: false,
+      allowNull: true,
     },
     name: {
+      type: STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'Digite o nome do produto'
+        },
+      }
+    },
+    image: {
       type: STRING,
       allowNull: false
     },
     description: {
       type: TEXT,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'Digite uma descrição do produto'
+        },
+      }
     },
     price: {
       type: DOUBLE,
       allowNull: false,
-      defaultValue: 0
+      defaultValue: 0,
+      validate: {
+        isNumeric: {
+          msg: 'Digite um número'
+        },
+      }
     },
     stock: {
       type: INTEGER,
       allowNull: false,
-      defaultValue: 0
+      defaultValue: 0,
+      validate: {
+        isInt: {
+          msg: 'Digite um número inteiro'
+        },
+      }
     },
-    ratings:{
+    isFeatured: {
+      type: BOOLEAN,
+      defaultValue: 0,
+    },
+    featuredIn: {
+      type: BOOLEAN,
+      defaultValue: 0,
+    },
+    ratings: {
       type: FLOAT,
-      defaultValue: 0
+      defaultValue: 0,
+      validate: {
+        isFloat: {
+          msg: 'Digite um número'
+        },
+      }
     },
-    numOfReviews:{
+    numOfReviews: {
       type: INTEGER,
-      defaultValue: 0
+      defaultValue: 0,
     },
     createdAt: {
-    type: DATE,
-    allowNull: false,
-    defaultValue: new Date(),
+      type: DATE,
+      allowNull: false,
+      defaultValue: new Date(),
     },
     updatedAt: {
       type: DATE,
       allowNull: false,
       defaultValue: new Date(),
     }
-  },{
+  }, {
     tableName: 'products',
   })
 

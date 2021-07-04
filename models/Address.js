@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
       type: BIGINT,
       allowNull: true,
     },
+    fullName: {
+      type: STRING,
+      allowNull: false,
+    },
     address: {
       type: STRING,
       allowNull: false,
@@ -45,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: new Date(),
     },
   },{
-    timestamps: false,
+    timestamps: true,
     tableName: 'addresses',
     
   })
