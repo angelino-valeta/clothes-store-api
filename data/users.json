@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Angelino Valeta",
+    "email":"angelinovaleta@gmail.com",
+    "password": "123456",
+    "phone": "+244 999 123 456",
+    "role": "admin"
+  },
+  {
+    "name": "Maria Valeta",
+    "email":"maria@gmail.com",
+    "password": "1234567",
+    "phone": "+244 999 123 456",
+    "role": "admin"
+  },
+  {
+    "name": "Raúl Manuel",
+    "email":"raulmanuel@gmail.com",
+    "password": "12345",
+    "phone": "+244 999 123 456"
+  },
+  {
+    "name": "Alina Kavange",
+    "email":"alinakavange@gmail.com",
+    "password": "1234568",
+    "phone": "+244 999 123 456"
+  },
+  {
+    "name": "Humberto Fortes",
+    "email":"humberto@gmail.com",
+    "password": "1234568",
+    "phone": "+244 999 123 456"
+  },
+  {
+    "name": "Nolasco dos Anjos",
+    "email":"nolasco@gmail.com",
+    "password": "123456",
+    "phone": "+244 999 123 456"
+  },
+  {
+    "name": "Gusmão Vidal",
+    "email":"gusmao@gmail.com",
+    "password": "123",
+    "phone": "+244 999 123 456"
+  },
+  {
+    "name": "Armando Katito",
+    "email":"armandokatito@gmail.com",
+    "password": "12345",
+    "phone": "+244 999 123 456"
+  },
+  {
+    "name": "Bernardeth Bueke",
+    "email":"bernardeth@gmail.com",
+    "password": "12345",
+    "phone": "+244 999 123 456"
+  }
+]

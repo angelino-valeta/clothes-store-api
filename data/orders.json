@@ -1,0 +1,10 @@
+[
+  {
+    "addressId": 1,
+    "orderItems": 2,
+    "itemsPrice": 30000,
+    "shippingPrice": 100,
+    "taxPrice": 50,
+    "totalPrice": 30150
+  }
+]

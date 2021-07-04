@@ -1,0 +1,47 @@
+[
+  {
+    "userId": 1,
+    "fullName": "Angelino Valeta",
+    "address": "Zona alta - 27 de Março",
+    "city": "Lobito",
+    "street": "27 de Março",
+    "country": "Angola",
+    "zipCode": "0109"
+  },
+  {
+    "userId": 1,
+    "fullName": "Angelino Valeta",
+    "address": "Avenida Aires",
+    "city": "Benguela",
+    "street": "Avelinda Aires",
+    "country": "Angola",
+    "zipCode": "0901"
+  },
+  {
+    "userId": 2,
+    "fullName": "Humberto Fortes",
+    "address": "Cedofeita",
+    "city": "Porto",
+    "street": "Cedofeita",
+    "country": "Portugal",
+    "zipCode": "1312"
+  },
+  {
+    "userId": 3,
+    "fullName": "Raúl Manuel",
+    "address": "Santa Marta do Bouro",
+    "city": "Felgueiras",
+    "street": "Santa Marta do Bouro",
+    "country": "Portugal",
+    "zipCode": "1303"
+  },
+  {
+    "userId": 4,
+    "fullName": "Alina Kavange",
+    "address": "Zona comercial 28",
+    "city": "Lobito",
+    "street": "Casa pessoal do Lobito",
+    "country": "Angola",
+    "zipCode": "0901"
+  }
+]

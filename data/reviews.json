@@ -1,0 +1,17 @@
+[
+  {
+    "comment": "Muito bom, recomendo",
+    "productId": 1,
+    "rating": 5
+  },
+  {
+    "comment": "T-Shirt muito top",
+    "productId": 2,
+    "rating": 5
+  },
+  {
+    "comment": "Mascara legal",
+    "productId": 3,
+    "rating": 3
+  }
+]
