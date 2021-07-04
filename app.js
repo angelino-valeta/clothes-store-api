@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 const app = express()
 const cookieParser = require('cookie-parser')
 
@@ -6,7 +7,7 @@ const errorMiddleware = require('./middlewares/errors')
 
 app.use(express.json());
 app.use(cookieParser())
-
+app.use(cors())
 
 // importar todas rotas
 const auth = require('./routes/auth')
