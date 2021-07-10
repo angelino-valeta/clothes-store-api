@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const fileUpload = require('../middlewares/file-upload')
 
 const {
   createProduct,
@@ -26,7 +27,7 @@ router.get('/products/recomendation/:categoryId', getRecommendation, )
 router.get('/product/:id', getProduct)
 
 // Admin routers
-router.route('/admin/product/new').post(isAuthenticatedUser, authorize('admin'), createProduct)
+router.route('/admin/product/new').post(fileUpload.single('image'), isAuthenticatedUser, authorize('admin'), createProduct)
 router.route('/admin/product/:id')
   .put(isAuthenticatedUser, authorize('admin'), updateProduct)
   .delete(isAuthenticatedUser, authorize('admin'), deleteProduct)

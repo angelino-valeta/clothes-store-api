@@ -1,3 +1,5 @@
+const fs = require('fs')
+const path = require('path')
 const express = require('express')
 const cors = require('cors')
 const app = express()
@@ -8,6 +10,9 @@ const errorMiddleware = require('./middlewares/errors')
 app.use(express.json());
 app.use(cookieParser())
 app.use(cors())
+
+// caminho para uploads
+app.use('/uploads/images', express.static(path.join('uploads', 'images')))
 
 // importar todas rotas
 const auth = require('./routes/auth')

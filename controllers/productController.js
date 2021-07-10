@@ -8,9 +8,30 @@ const catchAsyncErrors = require('../middlewares/catchAsyncErrors')
 // Criar Product  => /api/v1/admin/product/new
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
 
-  const data = req.body
+  const {
+    name,
+    description,
+    categoryId,
+    price,
+    stock,
+    isFeatured,
+    featuredIn,
+    ratings,
+    numOfReviews,
+  } = req.body
 
-  const product = await Product.create(data)
+  const product = await Product.create({
+    name,
+    description,
+    categoryId,
+    price,
+    stock,
+    isFeatured,
+    featuredIn,
+    ratings,
+    numOfReviews,
+    image: req.file.path
+  })
 
   res.status(201).json({
     success: true,
