@@ -1,3 +1,4 @@
+const fs = require('fs')
 const {
   Product,
   Category
@@ -231,11 +232,20 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
 
   const product = await Product.findByPk(id)
 
+
+  console.log(product)
+
   if (!product) {
     return next(new ErrorHandler('Produto não encontrado', 404))
   }
 
+  const imagePath = product.image
+
   await product.destroy()
+
+  fs.unlink(imagePath, err => {
+    console.log(err);
+  })
 
   res.status(200).json({
     success: true,
