@@ -178,9 +178,6 @@ exports.getProduct = catchAsyncErrors(async (req, res, next) => {
   } = req.params
 
   const product = await Product.findByPk(id, {
-    attributes: {
-      exclude: ['categoryId']
-    },
     include: {
       model: Category,
       attributes: [

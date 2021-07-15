@@ -29,7 +29,7 @@ router.get('/product/:id', getProduct)
 // Admin routers
 router.route('/admin/product/new').post(fileUpload.single('image'), isAuthenticatedUser, authorize('admin'), createProduct)
 router.route('/admin/product/:id')
-  .put(isAuthenticatedUser, authorize('admin'), updateProduct)
+  .put(fileUpload.single('image'), isAuthenticatedUser, authorize('admin'), updateProduct)
   .delete(isAuthenticatedUser, authorize('admin'), deleteProduct)
 
 module.exports = router

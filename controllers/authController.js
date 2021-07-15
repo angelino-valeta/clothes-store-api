@@ -1,4 +1,7 @@
-const { User, Address } = require('../models')
+const {
+  User,
+  Address
+} = require('../models')
 const sendToken = require('../utils/jwtToken')
 const ErrorHandler = require('../utils/errorHandler')
 const bcrypt = require('bcryptjs')
@@ -7,45 +10,68 @@ const catchAsyncErrors = require('../middlewares/catchAsyncErrors')
 
 // Registrar User  => api/v1/auth/register
 exports.register = catchAsyncErrors(async (req, res, next) => {
-  
-  const { name, email ,password, phone } = req.body
 
-  const user = await User.create({ name, email, password, phone })
-  
+  const {
+    name,
+    email,
+    password,
+    phone
+  } = req.body
+
+  const user = await User.create({
+    name,
+    email,
+    password,
+    phone
+  })
+
   sendToken(user, 200, res)
 
-}) 
+})
+
 
 // Login User   => /api/v1/auth/login
 exports.login = catchAsyncErrors(async (req, res, next) => {
 
-  const { email ,password } = req.body
+  const {
+    email,
+    password
+  } = req.body
+
+
 
   // Verificar se existe password e email
-  if(!email || !password){
+  if (!email || !password) {
     return next(new ErrorHandler('Por favor digite a password e o email ', 400))
   }
 
   // Procurar user na database
-  const user = await User.findOne({ where: { email }})
+  const user = await User.findOne({
+    where: {
+      email
+    }
+  })
 
-  if(!user){
+  console.log(user)
+
+  if (!user) {
     return next(new ErrorHandler('Usuário não encontrado', 401))
   }
 
   const isPasswordMatched = await user.comparePassword(password)
-
-  if(!isPasswordMatched){
+  console.log(isPasswordMatched)
+  if (!isPasswordMatched) {
     return next(new ErrorHandler('Password incorrecta.', 401))
   }
   sendToken(user, 200, res)
 })
 
+
 // Get usuário lougado    => /api/v1/auth/me
 exports.getMe = catchAsyncErrors(async (req, res, next) => {
-  
+
   const user = await User.findByPk(req.user.id)
-  
+
   res.status(200).json({
     success: true,
     data: user
@@ -92,20 +118,20 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
 
   const user = await User.findByPk(req.user.id)
 
-  if(!user){
+  if (!user) {
     return next(new ErrorHandler('Usuário não encontrado', 404))
   }
 
-  let newPassword = req.body.newPassword 
+  let newPassword = req.body.newPassword
 
   const isPasswordMatched = await user.comparePassword(req.body.password)
 
-  if(!isPasswordMatched){
+  if (!isPasswordMatched) {
     return next(new ErrorHandler('Password  actual incorrecta.', 401))
   }
 
-  newPassword = bcrypt.hashSync(newPassword,10)
-  
+  newPassword = bcrypt.hashSync(newPassword, 10)
+
 
   user.password = newPassword
 
@@ -125,7 +151,7 @@ exports.deleteAccount = catchAsyncErrors(async (req, res, next) => {
 
   const user = await User.findByPk(req.user.id)
 
-  if(!user){
+  if (!user) {
     return next(new ErrorHandler('Usuário não encontrado', 404))
   }
 
@@ -136,6 +162,3 @@ exports.deleteAccount = catchAsyncErrors(async (req, res, next) => {
     message: 'Usuário deletado'
   })
 })
-
-
-

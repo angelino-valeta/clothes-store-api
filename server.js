@@ -21,7 +21,8 @@ const PORT = process.env.PORT || 5000
 
 // Conectando a base de dados e o ligando o servidor 
 sequelize.sync({
-    force: false
+    //force: false,
+    logging: false
   })
   .then(() => {
     app.listen(PORT, () => {

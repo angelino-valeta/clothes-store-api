@@ -68,8 +68,12 @@ module.exports = function (sequelize, DataTypes) {
 
   // Relacionamento de tabelas
   OrderItem.associate = function (models) {
-    OrderItem.belongsTo(models.Product)
-    OrderItem.belongsTo(models.Order)
+    OrderItem.belongsTo(models.Product, {
+      onDelete: 'cascade'
+    })
+    OrderItem.belongsTo(models.Order, {
+      onDelete: 'cascade'
+    })
   }
 
   OrderItem.beforeBulkUpdate(orderItem => {

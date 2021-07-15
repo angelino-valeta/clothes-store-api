@@ -104,7 +104,9 @@ module.exports = (sequelize, DataTypes) => {
 
   // Relacionamento de tabelas
   Product.associate = (models) => {
-    Product.belongsTo(models.Category)
+    Product.belongsTo(models.Category, {
+      onDelete: 'cascade'
+    })
   }
 
   return Product

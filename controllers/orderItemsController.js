@@ -28,7 +28,7 @@ exports.getOrderItem = catchAsyncErrors(async (req, res) => {
 
   const orderItems = await OrderItem.findAll({
     where: {
-      id
+      orderId: id
     },
     include: {
       model: Product,

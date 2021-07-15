@@ -80,9 +80,15 @@ module.exports = function (sequelize, DataTypes) {
   })
   // Relacionamento de tabelas
   Order.associate = (models) => {
-    Order.hasMany(models.OrderItem)
-    Order.belongsTo(models.User)
-    Order.belongsTo(models.Address)
+    Order.hasMany(models.OrderItem, {
+      onDelete: 'cascade'
+    })
+    Order.belongsTo(models.User, {
+      onDelete: 'cascade'
+    })
+    Order.belongsTo(models.Address, {
+      onDelete: 'cascade'
+    })
   }
 
   Order.beforeBulkUpdate(order => {

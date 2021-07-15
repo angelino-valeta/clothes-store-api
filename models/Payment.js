@@ -41,7 +41,9 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   Payment.associate = (models) => {
-    Payment.belongsTo(models.Order);
+    Payment.belongsTo(models.Order, {
+      onDelete: 'cascade'
+    });
 
   };
 

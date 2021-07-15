@@ -114,6 +114,8 @@ module.exports = (sequelize, DataTypes) => {
 
   // Verificação da palavra passe
   User.prototype.comparePassword = async function (enteredPassword) {
+    console.log(enteredPassword)
+    console.log(this.password)
     return bcrypt.compare(enteredPassword, this.password)
   }
 
