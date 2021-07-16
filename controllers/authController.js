@@ -101,16 +101,16 @@ exports.updatePerfile = catchAsyncErrors(async (req, res, next) => {
     phone: req.body.phone
   }
 
-  user = await User.update(data, {
+  let user = await User.update(data, {
     where: {
       id: req.user.id
     }
   })
 
-  res.status(200).json({
-    success: true,
-    data: user
-  })
+  user = await User.findByPk(req.user.id)
+
+  sendToken(user, 200, res)
+
 })
 
 // Update User password  => /api/v1/auth/password/update

@@ -44,9 +44,6 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
 exports.getProducts = catchAsyncErrors(async (req, res) => {
 
   const products = await Product.findAll({
-    order: [
-      ['createdAt', 'DESC']
-    ],
     include: {
       model: Category,
       attributes: [
@@ -77,6 +74,7 @@ exports.getNewsProduct = catchAsyncErrors(async (req, res) => {
       'name',
       'image',
       'price',
+      'stock',
       'ratings',
       'categoryId'
     ]
